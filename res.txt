@@ -1,0 +1,73 @@
+﻿
+===== T2 process tree: K windows with ping -t
+PING.EXE count (expect 3): 3
+
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+PING.EXE                      3248 Console                    2      5,232 K
+PING.EXE                      6128 Console                    2      5,232 K
+PING.EXE                      7176 Console                    2      5,244 K
+
+ProcessId ParentProcessId
+--------- ---------------
+     3248            2196
+     6128            6248
+     7176            2996
+
+
+after end process: ping=2 (expect 2); parent cmd alive=True (expect True)
+SUCCESS: The process with PID 8960 (child process of PID 6248) has been terminated.
+SUCCESS: The process with PID 6128 (child process of PID 6248) has been terminated.
+SUCCESS: The process with PID 6248 (child process of PID 5176) has been terminated.
+after end tree: ping=1 (expect 1)
+INFO: No tasks are running which match the specified criteria.
+
+===== T3 services -> svchost
+
+SERVICE_NAME: Dnscache 
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 4  RUNNING 
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+        PID                : 1120
+        FLAGS              : 
+
+Image Name                     PID Services                                    
+========================= ======== ============================================
+svchost.exe                   1120 Dnscache                                    
+
+===== T4 performance
+4
+130
+16
+
+===== T5 network
+
+Name            LinkSpeed
+----            ---------
+vEthernet (nat) 10 Gbps  
+Ethernet 4      50 Gbps  
+Ethernet 3      50 Gbps  
+
+===== T7/T8 priority
+                         
+                         
+                         
+
+===== T10 memory/disk
+32.2
+
+===== T11 listening ports
+                         
+                         
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       1104
+  TCP    [::]:135               [::]:0                 LISTENING       1104
+
+===== T12 cleanup check
+INFO: No tasks are running which match the specified criteria.
+INFO: No tasks are running which match the specified criteria.
+
+
