@@ -1,8 +1,8 @@
 $ErrorActionPreference='Continue'
 [Console]::OutputEncoding=[Text.Encoding]::UTF8
-function H($t){ Write-Host "`n===== $t" }
+function Hd($t){ Write-Host "`n===== $t" }
 $K=3
-H 'T2 process tree: K windows with ping -t'
+Hd 'T2 process tree: K windows with ping -t'
 1..$K | ForEach-Object { Start-Process cmd -ArgumentList '/k','ping -t 127.0.0.1' -WindowStyle Hidden }
 Start-Sleep 4
 "PING.EXE count (expect $K): " + @(Get-Process ping -ErrorAction SilentlyContinue).Count
@@ -21,18 +21,18 @@ Get-Process ping -ErrorAction SilentlyContinue | Stop-Process -Force
 Get-CimInstance Win32_Process -Filter "Name='cmd.exe' AND CommandLine LIKE '%ping -t%'" | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
 Start-Sleep 1
 cmd /c 'tasklist /fi "imagename eq ping.exe"'
-H 'T3 services -> svchost'
+Hd 'T3 services -> svchost'
 $svc='Dnscache'
 $q=sc.exe queryex $svc; $q
 $pid_=[int](($q | Select-String 'PID').ToString().Split(':')[1].Trim())
 cmd /c "tasklist /svc /fi `"PID eq $pid_`""
-H 'T4 performance'
+Hd 'T4 performance'
 $env:NUMBER_OF_PROCESSORS
 (Get-Process).Count
 [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 1)
-H 'T5 network'
+Hd 'T5 network'
 Get-NetAdapter | Select-Object Name, LinkSpeed
-H 'T7/T8 priority'
+Hd 'T7/T8 priority'
 $n=Start-Process notepad -PassThru; Start-Sleep 2
 Get-Process -Id $n.Id | Select-Object Id, ProcessName, PriorityClass
 (Get-Process -Id $n.Id).PriorityClass='AboveNormal'
@@ -40,11 +40,11 @@ Get-Process -Id $n.Id | Select-Object Id, ProcessName, PriorityClass
 (Get-Process -Id $n.Id).PriorityClass='Normal'
 Get-Process -Id $n.Id | Select-Object PriorityClass
 Stop-Process -Id $n.Id -Force
-H 'T10 memory/disk'
+Hd 'T10 memory/disk'
 [math]::Round((Get-PSDrive C).Free / 1GB, 1)
-H 'T11 listening ports'
+Hd 'T11 listening ports'
 Get-NetTCPConnection -State Listen -LocalPort 135 | Select-Object LocalPort, OwningProcess
 cmd /c 'netstat -ano | findstr LISTENING | findstr :135'
-H 'T12 cleanup check'
+Hd 'T12 cleanup check'
 cmd /c 'tasklist /fi "imagename eq ping.exe"'
 cmd /c 'tasklist /fi "imagename eq notepad.exe"'
