@@ -82,8 +82,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ./tests/run1517.ps1 *>&1 | Out-File -Encoding utf8 res_l1517.txt; if (!(Test-Path res_l1517.txt)) { 'NO OUTPUT' | Out-File res_l1517.txt }
-        shell: powershell
+      - run: powershell -NoProfile -ExecutionPolicy Bypass -File tests\run1517.ps1 > res_l1517.txt 2>&1
+        shell: cmd
         continue-on-error: true
       - if: always()
         shell: bash
