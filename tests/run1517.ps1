@@ -40,6 +40,12 @@ netsh advfirewall set currentprofile logging droppedconnections enable
 netsh advfirewall firewall set rule name="FW_${S}_ps80" new enable=yes
 "log test 80=" + (Test-NetConnection $H -Port 80 -InformationLevel Quiet -WarningAction SilentlyContinue)
 Start-Sleep 5
+1..3 | ForEach-Object { Test-NetConnection $H -Port 80 -InformationLevel Quiet -WarningAction SilentlyContinue | Out-Null }
+$lf="$env:SystemRoot\System32\LogFiles\Firewall"
+"log dir:"; Get-ChildItem $lf -ErrorAction SilentlyContinue | Select-Object Name, Length, LastWriteTime | Format-Table -AutoSize
+Start-Sleep 40
+"log dir after 40s:"; Get-ChildItem $lf -ErrorAction SilentlyContinue | Select-Object Name, Length, LastWriteTime | Format-Table -AutoSize
+"log tail:"; Get-Content "$lf\pfirewall.log" -Tail 8 -ErrorAction SilentlyContinue
 cmd /c 'findstr /c:"DROP TCP" "%SystemRoot%\System32\LogFiles\Firewall\pfirewall.log" | findstr /c:" 80 "'
 Get-WinEvent -LogName 'Microsoft-Windows-Windows Firewall With Advanced Security/Firewall' -MaxEvents 15 -ErrorAction SilentlyContinue | Select-Object TimeCreated, Id, @{n='Msg';e={$_.Message.Split("`n")[0]}} | Format-Table -AutoSize
 netsh advfirewall firewall set rule name="FW_${S}_ps80" new enable=no
@@ -48,6 +54,8 @@ Hd 'T8 cleanup + verify'
 netsh advfirewall firewall delete rule name="FW_${S}_ps80"
 netsh advfirewall firewall delete rule name="FW_${S}_icmp"
 netsh advfirewall firewall delete rule name="FW_${S}_in"
+Start-Sleep 2
+"events after deletes:"; Get-WinEvent -LogName 'Microsoft-Windows-Windows Firewall With Advanced Security/Firewall' -MaxEvents 8 -ErrorAction SilentlyContinue | ForEach-Object { "$($_.Id) $($_.Message.Split([char]10)[0])" }
 "left: " + ((netsh advfirewall firewall show rule name=all | Select-String "FW_$S" | Measure-Object).Count) + " (expect 0)"
 "counts now in=$(Cnt in) out=$(Cnt out) baseline in=$Ain out=$Aout"
 "after: 80=" + (Test-NetConnection $H -Port 80 -InformationLevel Quiet -WarningAction SilentlyContinue)
