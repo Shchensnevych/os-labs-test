@@ -1,0 +1,41 @@
+name: labs
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  l78:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run78.cmd
+        shell: cmd
+  l910:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run910.cmd
+        shell: cmd
+  l1112:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run1112.cmd
+        shell: cmd
+  l1314:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run1314.ps1
+        shell: powershell
+  l1517:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run1517.ps1
+        shell: powershell
+  l1820:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tests\run1820.ps1
+        shell: powershell
