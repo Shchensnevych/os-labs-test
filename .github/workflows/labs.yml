@@ -1,41 +1,116 @@
 name: labs
 on:
-  push:
   workflow_dispatch:
+  push:
+    paths: ['tests/**','labs/**','.github/workflows/**']
+permissions:
+  contents: write
 jobs:
   l78:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run78.cmd
+      - run: tests\run78.cmd > res_l78.txt 2>&1
         shell: cmd
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l78.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l78
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l78"
+          git push -f origin results-l78
   l910:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run910.cmd
+      - run: tests\run910.cmd > res_l910.txt 2>&1
         shell: cmd
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l910.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l910
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l910"
+          git push -f origin results-l910
   l1112:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run1112.cmd
+      - run: tests\run1112.cmd > res_l1112.txt 2>&1
         shell: cmd
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l1112.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l1112
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l1112"
+          git push -f origin results-l1112
   l1314:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run1314.ps1
+      - run: ./tests/run1314.ps1 *>&1 | Out-File -Encoding utf8 res_l1314.txt
         shell: powershell
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l1314.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l1314
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l1314"
+          git push -f origin results-l1314
   l1517:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run1517.ps1
+      - run: ./tests/run1517.ps1 *>&1 | Out-File -Encoding utf8 res_l1517.txt
         shell: powershell
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l1517.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l1517
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l1517"
+          git push -f origin results-l1517
   l1820:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tests\run1820.ps1
+      - run: ./tests/run1820.ps1 *>&1 | Out-File -Encoding utf8 res_l1820.txt
         shell: powershell
+        continue-on-error: true
+      - if: always()
+        shell: bash
+        run: |
+          cp res_l1820.txt /tmp/res.txt
+          git config user.name ci; git config user.email ci@example.com
+          git checkout --orphan results-l1820
+          git rm -rf . -q
+          cp /tmp/res.txt res.txt
+          git add res.txt
+          git commit -qm "results l1820"
+          git push -f origin results-l1820
