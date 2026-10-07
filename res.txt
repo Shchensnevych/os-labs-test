@@ -1,0 +1,225 @@
+===== T1 hello.bat
+Hello from a batch file!
+Привіт із пакетного файлу!
+Press any key to continue . . . 
+===== T2 info.bat
+==========================================
+Користувач   : runneradmin
+Комп'ютер    : runnervmfi6oq
+Дата         : Wed 10/07/2026
+Час          : 18:12:37.78
+Поточна тека : C:\Users\runneradmin
+Цей файл     : D:\a\os-labs-test\os-labs-test\labs\910\info.bat
+==========================================
+
+Пауза 5 секунд...
+ERROR: Input redirection is not supported, exiting the process immediately.
+Готово.
+Press any key to continue . . . 
+===== T3 params.bat
+Ім'я скрипта (%0)            : "D:\a\os-labs-test\os-labs-test\tests\..\labs\910\params.bat"
+Параметр 1 (%1)              : ivanenko
+Параметр 2 (%2)              : "My Folder"
+Параметр 3 (%3)              : C:\Windows\win.ini
+Усі параметри (%*)           : ivanenko "My Folder" C:\Windows\win.ini
+Ім'я 3-го без шляху (%~n3)   : win
+Розширення 3-го (%~x3)       : .ini
+Тека 3-го (%~dp3)            : C:\Windows\
+Тека самого скрипта (%~dp0)  : D:\a\os-labs-test\os-labs-test\labs\910\
+Press any key to continue . . . 
+===== T4 build_tree (expect 18)
+Тек у дереві (очікується 18):
+18
+===== T5 make_files (expect 24)
+Файлів у корені (очікується 24):
+24
+===== T6 organize (expect 9 and 36)
+Файли .tmp, які буде видалено:
+C:\Users\runneradmin\lab910_ivanenko\f22.tmp
+C:\Users\runneradmin\lab910_ivanenko\f23.tmp
+C:\Users\runneradmin\lab910_ivanenko\f24.tmp
+Файлів у корені (очікується 9):
+9
+Файлів у всьому дереві (очікується 36):
+36
+===== T6b dry_tmp
+===== T7 run_all (fresh)
+=== Крок 1: структура тек ===
+Тек у дереві (очікується 18):
+18
+=== Крок 2: створення файлів ===
+Файлів у корені (очікується 24):
+24
+=== Крок 3: упорядкування файлів ===
+Файли .tmp, які буде видалено:
+C:\Users\runneradmin\lab910_ivanenko\f22.tmp
+C:\Users\runneradmin\lab910_ivanenko\f23.tmp
+C:\Users\runneradmin\lab910_ivanenko\f24.tmp
+Файлів у корені (очікується 9):
+9
+Файлів у всьому дереві (очікується 36):
+36
+=== Усі кроки виконано ===
+===== T8 report
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\
+
+Звіт збережено: C:\Users\runneradmin\report910_ivanenko.txt
+--- report head
+1:===== Звіт пакетного файлу =====
+2:Дата: Wed 10/07/2026   Час: 18:12:38.28
+3:Користувач: runneradmin, комп'ютер: runnervmfi6oq
+5:--- Дерево каталогів ---
+6:Folder PATH listing for volume Windows
+7:Volume serial number is 2C40-3FBA
+8:C:.
+9:|   f1.txt
+10:|   f16.gif
+--- errors log
+File Not Found
+===== T9 loops
+--- for /l: створення 10 файлів ---
+10
+--- for /d: теки верхнього рівня ---
+Тека: d1
+Тека: d2
+Тека: d3
+Тека: loops
+--- for /f: теки зі списку імен ---
+dir_alpha
+dir_beta
+dir_gamma
+--- for /r: усі файли .pas у дереві ---
+C:\Users\runneradmin\lab910_ivanenko\f4.pas
+C:\Users\runneradmin\lab910_ivanenko\f5.pas
+C:\Users\runneradmin\lab910_ivanenko\f6.pas
+C:\Users\runneradmin\lab910_ivanenko\d2\d22\d221\f4.pas
+C:\Users\runneradmin\lab910_ivanenko\d2\d22\d221\f5.pas
+C:\Users\runneradmin\lab910_ivanenko\d2\d22\d221\f6.pas
+C:\Users\runneradmin\lab910_ivanenko\d3\d32\f4.pas
+C:\Users\runneradmin\lab910_ivanenko\d3\d32\f5.pas
+C:\Users\runneradmin\lab910_ivanenko\d3\d32\f6.pas
+--- очищення ---
+===== T9 sort_by_ext (expect 12 then 0)
+Файлів у inbox до сортування (очікується 12):
+12
+Файлів у inbox після сортування (очікується 0):
+File Not Found
+0
+Folder PATH listing for volume Windows
+Volume serial number is 2C40-3FBA
+C:\USERS\RUNNERADMIN\LAB910_IVANENKO\INBOX
++---jpg
+|       doc1.jpg
+|       doc2.jpg
+|       doc3.jpg
+|       
++---log
+|       doc1.log
+|       doc2.log
+|       doc3.log
+|       
++---pdf
+|       doc1.pdf
+|       doc2.pdf
+|       doc3.pdf
+|       
+\---txt
+        doc1.txt
+        doc2.txt
+        doc3.txt
+        
+===== T10 final (expect rc 1, zip)
+Початок: 18:12:38.56
+=== Крок 1: структура тек ===
+Тек у дереві (очікується 18):
+18
+=== Крок 2: створення файлів ===
+Файлів у корені (очікується 24):
+24
+=== Крок 3: упорядкування файлів ===
+Файли .tmp, які буде видалено:
+C:\Users\runneradmin\lab910_ivanenko\f22.tmp
+C:\Users\runneradmin\lab910_ivanenko\f23.tmp
+C:\Users\runneradmin\lab910_ivanenko\f24.tmp
+Файлів у корені (очікується 9):
+9
+Файлів у всьому дереві (очікується 36):
+36
+=== Усі кроки виконано ===
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\
+
+Звіт збережено: C:\Users\runneradmin\report910_ivanenko.txt
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        19        19         0         0         0         0
+   Files :        36        36         0         0         0         0
+   Bytes :       267       267         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :              11,125 Bytes/sec.
+   Speed :               0.637 MegaBytes/min.
+   Ended : Wednesday, October 7, 2026 6:12:38 PM
+
+Код завершення robocopy (очікується 1): 1
+Архів створено: C:\Users\runneradmin\lab910_ivanenko.zip 
+Кінець: 18:12:38.93
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\Users\runneradmin
+
+10/07/2026  06:12 PM            11,945 lab910_ivanenko.zip
+               1 File(s)         11,945 bytes
+               0 Dir(s)  34,425,274,368 bytes free
+===== second final run
+Початок: 18:12:38.95
+=== Крок 1: структура тек ===
+Тек у дереві (очікується 18):
+18
+=== Крок 2: створення файлів ===
+Файлів у корені (очікується 24):
+24
+=== Крок 3: упорядкування файлів ===
+Файли .tmp, які буде видалено:
+C:\Users\runneradmin\lab910_ivanenko\f22.tmp
+C:\Users\runneradmin\lab910_ivanenko\f23.tmp
+C:\Users\runneradmin\lab910_ivanenko\f24.tmp
+Файлів у корені (очікується 9):
+9
+Файлів у всьому дереві (очікується 36):
+36
+=== Усі кроки виконано ===
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\
+
+Звіт збережено: C:\Users\runneradmin\report910_ivanenko.txt
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        19        19         0         0         0         0
+   Files :        36        36         0         0         0         0
+   Bytes :       267       267         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :              10,680 Bytes/sec.
+   Speed :               0.611 MegaBytes/min.
+   Ended : Wednesday, October 7, 2026 6:12:39 PM
+
+Код завершення robocopy (очікується 1): 1
+Архів створено: C:\Users\runneradmin\lab910_ivanenko.zip 
+Кінець: 18:12:39.25
