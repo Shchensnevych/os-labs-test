@@ -1,0 +1,510 @@
+######## TASK 1
+######## TASK 2
+> cd /d %USERPROFILE%
+[exit 0]
+> md lab78_<прізвище>
+[exit 0]
+> cd lab78_<прізвище>
+[exit 0]
+> md d1 d2 d3
+[exit 0]
+> md d1\d11 d1\d12 d1\d13
+[exit 0]
+> md d2\d21 d2\d22 d2\d23
+[exit 0]
+> md d2\d22\d221 d2\d22\d222 d2\d22\d223
+[exit 0]
+> md d3\d31 d3\d32 d3\d33
+[exit 0]
+> md d3\d33\d331 d3\d33\d332 d3\d33\d333
+[exit 0]
+> dir /s /b /ad | find /c /v ""
+18
+[exit 0]
+CHECK dirs (expect 18): 
+18
+######## TASK 3
+######## TASK 4
+> rd d3\d33\d331
+[exit 0]
+> rd d3\d33\d332
+[exit 0]
+> rd d3\d33\d333
+[exit 0]
+> tree
+Folder PATH listing for volume Windows
+Volume serial number is 2C40-3FBA
+C:.
++---d1
+�   +---d11
+�   +---d12
+�   +---d13
++---d2
+�   +---d21
+�   +---d22
+�   �   +---d221
+�   �   +---d222
+�   �   +---d223
+�   +---d23
++---d3
+    +---d31
+    +---d32
+    +---d33
+[exit 0]
+> md test_del
+[exit 0]
+> echo x > test_del\a.txt
+[exit 0]
+> rd test_del
+The directory is not empty.
+[exit 0]
+> rd /s test_del
+test_del, Are you sure (Y/N)? 
+[exit 0]
+> dir /b test_del
+a.txt
+[exit 0]
+######## TASK 5
+> echo FILE1 > a.txt
+[exit 0]
+> >b.txt echo FILE1
+[exit 0]
+> dir a.txt b.txt
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\Users\runneradmin\lab78_ivanenko
+
+10/07/2026  06:12 PM                 8 a.txt
+
+ Directory of C:\Users\runneradmin\lab78_ivanenko
+
+10/07/2026  06:12 PM                 7 b.txt
+               2 File(s)             15 bytes
+               0 Dir(s)  31,337,857,024 bytes free
+[exit 0]
+> del a.txt b.txt
+[exit 0]
+> for %i in (1 2 3) do >f%i.txt echo FILE%i
+[exit 0]
+> for %i in (4 5 6) do >f%i.pas echo FILE%i
+[exit 0]
+> for %i in (7 8 9) do >f%i.cpp echo FILE%i
+[exit 0]
+> for %i in (10 11 12) do >f%i.bat echo FILE%i
+[exit 0]
+> for %i in (13 14 15) do >f%i.exe echo FILE%i
+[exit 0]
+> for %i in (16 17 18) do >f%i.gif echo FILE%i
+[exit 0]
+> for %i in (19 20 21) do >f%i.com echo FILE%i
+[exit 0]
+> for %i in (22 23 24) do >f%i.tmp echo FILE%i
+[exit 0]
+> >"%TEMP%\n78.txt" echo перший
+[exit 0]
+> >>"%TEMP%\n78.txt" echo другий
+[exit 0]
+> type "%TEMP%\n78.txt"
+перший
+другий
+[exit 0]
+> >"%TEMP%\n78.txt" echo третій
+[exit 0]
+> type "%TEMP%\n78.txt"
+третій
+[exit 0]
+> del "%TEMP%\n78.txt"
+[exit 0]
+CHECK files (expect 24 files/183 bytes): 
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\Users\runneradmin\lab78_ivanenko
+
+10/07/2026  06:12 PM                 7 f1.txt
+10/07/2026  06:12 PM                 8 f10.bat
+10/07/2026  06:12 PM                 8 f11.bat
+10/07/2026  06:12 PM                 8 f12.bat
+10/07/2026  06:12 PM                 8 f13.exe
+10/07/2026  06:12 PM                 8 f14.exe
+10/07/2026  06:12 PM                 8 f15.exe
+10/07/2026  06:12 PM                 8 f16.gif
+10/07/2026  06:12 PM                 8 f17.gif
+10/07/2026  06:12 PM                 8 f18.gif
+10/07/2026  06:12 PM                 8 f19.com
+10/07/2026  06:12 PM                 7 f2.txt
+10/07/2026  06:12 PM                 8 f20.com
+10/07/2026  06:12 PM                 8 f21.com
+10/07/2026  06:12 PM                 8 f22.tmp
+10/07/2026  06:12 PM                 8 f23.tmp
+10/07/2026  06:12 PM                 8 f24.tmp
+10/07/2026  06:12 PM                 7 f3.txt
+10/07/2026  06:12 PM                 7 f4.pas
+10/07/2026  06:12 PM                 7 f5.pas
+10/07/2026  06:12 PM                 7 f6.pas
+10/07/2026  06:12 PM                 7 f7.cpp
+10/07/2026  06:12 PM                 7 f8.cpp
+10/07/2026  06:12 PM                 7 f9.cpp
+              24 File(s)            183 bytes
+               0 Dir(s)  31,337,857,024 bytes free
+######## TASK 6
+> >f1.txt:note echo flow of file 1
+[exit 0]
+> >f2.txt:note echo flow of file 2
+[exit 0]
+> >f3.txt:note echo flow of file 3
+[exit 0]
+> attrib f22.tmp
+A                    C:\Users\runneradmin\lab78_ivanenko\f22.tmp
+[exit 0]
+> attrib +r f22.tmp
+[exit 0]
+> del f22.tmp
+C:\Users\runneradmin\lab78_ivanenko\f22.tmp
+Access is denied.
+[exit 0]
+> attrib -r f22.tmp
+[exit 0]
+> attrib +h f23.tmp
+[exit 0]
+> dir /b *.tmp
+f22.tmp
+f24.tmp
+[exit 0]
+> dir /b /a *.tmp
+f22.tmp
+f23.tmp
+f24.tmp
+[exit 0]
+> dir /a:h /b
+f23.tmp
+[exit 0]
+> attrib -h f23.tmp
+[exit 0]
+######## TASK 7
+> copy *.txt d2\d22\d222
+f1.txt
+f2.txt
+f3.txt
+        3 file(s) copied.
+[exit 0]
+> copy *.gif d2\d22\d223
+f16.gif
+f17.gif
+f18.gif
+        3 file(s) copied.
+[exit 0]
+> copy *.pas d2\d22\d221
+f4.pas
+f5.pas
+f6.pas
+        3 file(s) copied.
+[exit 0]
+> fc /b f1.txt d2\d22\d222\f1.txt
+Comparing files f1.txt and D2\D22\D222\F1.TXT
+FC: no differences encountered
+
+[exit 0]
+> certutil -hashfile f1.txt SHA256
+SHA256 hash of f1.txt:
+4d69286ac50048f41ada4236c006d182b686bcf26f209656e39ae6f62050a0dc
+CertUtil: -hashfile command completed successfully.
+[exit 0]
+> certutil -hashfile d2\d22\d222\f1.txt SHA256
+SHA256 hash of d2\d22\d222\f1.txt:
+4d69286ac50048f41ada4236c006d182b686bcf26f209656e39ae6f62050a0dc
+CertUtil: -hashfile command completed successfully.
+[exit 0]
+> fc /b f1.txt d2\d22\d222\f2.txt
+Comparing files f1.txt and D2\D22\D222\F2.TXT
+00000004: 31 32
+[exit 1]
+CHECK files expect 33: 
+34
+######## TASK 8
+> for %c in (*.cpp *.pas) do copy %c d3\d32\
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+[exit 0]
+> for %f in (*.exe) do @echo Файл %~nf має розмір %~zf байт
+Файл f13 має розмір 8 байт
+Файл f14 має розмір 8 байт
+Файл f15 має розмір 8 байт
+[exit 0]
+> for /d %d in (*) do @echo %d
+d1
+d2
+d3
+test_del
+[exit 0]
+> for /r %f in (*.pas) do @echo %f
+C:\Users\runneradmin\lab78_ivanenko\f4.pas
+C:\Users\runneradmin\lab78_ivanenko\f5.pas
+C:\Users\runneradmin\lab78_ivanenko\f6.pas
+C:\Users\runneradmin\lab78_ivanenko\d2\d22\d221\f4.pas
+C:\Users\runneradmin\lab78_ivanenko\d2\d22\d221\f5.pas
+C:\Users\runneradmin\lab78_ivanenko\d2\d22\d221\f6.pas
+C:\Users\runneradmin\lab78_ivanenko\d3\d32\f4.pas
+C:\Users\runneradmin\lab78_ivanenko\d3\d32\f5.pas
+C:\Users\runneradmin\lab78_ivanenko\d3\d32\f6.pas
+[exit 0]
+> for /l %n in (1,1,5) do @echo %n
+1
+2
+3
+4
+5
+[exit 0]
+CHECK files expect 39: 
+40
+######## TASK 9
+> move *.cpp d1\d12
+C:\Users\runneradmin\lab78_ivanenko\f7.cpp
+C:\Users\runneradmin\lab78_ivanenko\f8.cpp
+C:\Users\runneradmin\lab78_ivanenko\f9.cpp
+        3 file(s) moved.
+[exit 0]
+> move *.bat d1\d13
+C:\Users\runneradmin\lab78_ivanenko\f10.bat
+C:\Users\runneradmin\lab78_ivanenko\f11.bat
+C:\Users\runneradmin\lab78_ivanenko\f12.bat
+        3 file(s) moved.
+[exit 0]
+> move *.exe d2\d21
+C:\Users\runneradmin\lab78_ivanenko\f13.exe
+C:\Users\runneradmin\lab78_ivanenko\f14.exe
+C:\Users\runneradmin\lab78_ivanenko\f15.exe
+        3 file(s) moved.
+[exit 0]
+> move *.com d2\d23
+C:\Users\runneradmin\lab78_ivanenko\f19.com
+C:\Users\runneradmin\lab78_ivanenko\f20.com
+C:\Users\runneradmin\lab78_ivanenko\f21.com
+        3 file(s) moved.
+[exit 0]
+> ren *.tmp *.bak
+[exit 0]
+> move d3\d31 d3\archive
+        1 dir(s) moved.
+[exit 0]
+CHECK tree 
+Folder PATH listing for volume Windows
+Volume serial number is 2C40-3FBA
+C:.
+|   f1.txt
+|   f16.gif
+|   f17.gif
+|   f18.gif
+|   f2.txt
+|   f22.bak
+|   f23.bak
+|   f24.bak
+|   f3.txt
+|   f4.pas
+|   f5.pas
+|   f6.pas
+|   
++---d1
+|   +---d11
+|   +---d12
+|   |       f7.cpp
+|   |       f8.cpp
+|   |       f9.cpp
+|   |       
+|   \---d13
+|           f10.bat
+|           f11.bat
+|           f12.bat
+|           
++---d2
+|   +---d21
+|   |       f13.exe
+|   |       f14.exe
+|   |       f15.exe
+|   |       
+|   +---d22
+|   |   +---d221
+|   |   |       f4.pas
+|   |   |       f5.pas
+|   |   |       f6.pas
+|   |   |       
+|   |   +---d222
+|   |   |       f1.txt
+|   |   |       f2.txt
+|   |   |       f3.txt
+|   |   |       
+|   |   \---d223
+|   |           f16.gif
+|   |           f17.gif
+|   |           f18.gif
+|   |           
+|   \---d23
+|           f19.com
+|           f20.com
+|           f21.com
+|           
++---d3
+|   +---archive
+|   +---d32
+|   |       f4.pas
+|   |       f5.pas
+|   |       f6.pas
+|   |       f7.cpp
+|   |       f8.cpp
+|   |       f9.cpp
+|   |       
+|   \---d33
+\---test_del
+        a.txt
+        
+######## TASK 10
+> tree /f /a > "%USERPROFILE%\tree78_^<прізвище^>.txt"
+[exit 0]
+> dir /s /a-d /b > "%USERPROFILE%\files78_^<прізвище^>.txt"
+[exit 0]
+> type "%USERPROFILE%\files78_^<прізвище^>.txt" | find /c /v ""
+40
+[exit 0]
+> robocopy "%USERPROFILE%\lab78_^<прізвище^>" "%USERPROFILE%\lab78_^<прізвище^>_backup" /e
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Wednesday, October 7, 2026 6:12:29 PM
+   Source : C:\Users\runneradmin\lab78_ivanenko\
+     Dest : C:\Users\runneradmin\lab78_ivanenko_backup\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	  New Dir         12	C:\Users\runneradmin\lab78_ivanenko\
+	    New File  		       7	f1.txt 30%  100%  
+	    New File  		       8	f16.gif100%  
+	    New File  		       8	f17.gif100%  
+	    New File  		       8	f18.gif100%  
+	    New File  		       7	f2.txt 30%  100%  
+	    New File  		       8	f22.bak100%  
+	    New File  		       8	f23.bak100%  
+	    New File  		       8	f24.bak100%  
+	    New File  		       7	f3.txt 30%  100%  
+	    New File  		       7	f4.pas100%  
+	    New File  		       7	f5.pas100%  
+	    New File  		       7	f6.pas100%  
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d1\
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d1\d11\
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d1\d12\
+	    New File  		       7	f7.cpp100%  
+	    New File  		       7	f8.cpp100%  
+	    New File  		       7	f9.cpp100%  
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d1\d13\
+	    New File  		       8	f10.bat100%  
+	    New File  		       8	f11.bat100%  
+	    New File  		       8	f12.bat100%  
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d2\
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d2\d21\
+	    New File  		       8	f13.exe100%  
+	    New File  		       8	f14.exe100%  
+	    New File  		       8	f15.exe100%  
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d2\d22\
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d221\
+	    New File  		       7	f4.pas100%  
+	    New File  		       7	f5.pas100%  
+	    New File  		       7	f6.pas100%  
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d222\
+	    New File  		       7	f1.txt 30%  100%  
+	    New File  		       7	f2.txt 30%  100%  
+	    New File  		       7	f3.txt 30%  100%  
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d223\
+	    New File  		       8	f16.gif100%  
+	    New File  		       8	f17.gif100%  
+	    New File  		       8	f18.gif100%  
+	  New Dir          3	C:\Users\runneradmin\lab78_ivanenko\d2\d23\
+	    New File  		       8	f19.com100%  
+	    New File  		       8	f20.com100%  
+	    New File  		       8	f21.com100%  
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d3\
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d3\archive\
+	  New Dir          6	C:\Users\runneradmin\lab78_ivanenko\d3\d32\
+	    New File  		       7	f4.pas100%  
+	    New File  		       7	f5.pas100%  
+	    New File  		       7	f6.pas100%  
+	    New File  		       7	f7.cpp100%  
+	    New File  		       7	f8.cpp100%  
+	    New File  		       7	f9.cpp100%  
+	  New Dir          0	C:\Users\runneradmin\lab78_ivanenko\d3\d33\
+	  New Dir          1	C:\Users\runneradmin\lab78_ivanenko\test_del\
+	    New File  		       4	a.txt100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        17        17         0         0         0         0
+   Files :        40        40         0         0         0         0
+   Bytes :       295       295         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :               9,516 Bytes/sec.
+   Speed :               0.545 MegaBytes/min.
+   Ended : Wednesday, October 7, 2026 6:12:29 PM
+
+[exit 1]
+> echo %ERRORLEVEL%
+1
+[exit 1]
+> robocopy "%USERPROFILE%\lab78_^<прізвище^>" "%USERPROFILE%\lab78_^<прізвище^>_backup" /e /njh
+
+	                  12	C:\Users\runneradmin\lab78_ivanenko\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d1\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d1\d11\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d1\d12\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d1\d13\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d2\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d2\d21\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d2\d22\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d221\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d222\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d2\d22\d223\
+	                   3	C:\Users\runneradmin\lab78_ivanenko\d2\d23\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d3\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d3\archive\
+	                   6	C:\Users\runneradmin\lab78_ivanenko\d3\d32\
+	                   0	C:\Users\runneradmin\lab78_ivanenko\d3\d33\
+	                   1	C:\Users\runneradmin\lab78_ivanenko\test_del\
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :        17         0        17         0         0         0
+   Files :        40         0        40         0         0         0
+   Bytes :       295         0       295         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+   Ended : Wednesday, October 7, 2026 6:12:29 PM
+
+[exit 0]
+> echo %ERRORLEVEL%
+0
+[exit 0]
+> tar -a -c -f "%USERPROFILE%\lab78_^<прізвище^>.zip" -C "%USERPROFILE%" lab78_<прізвище>
+[exit 0]
+> dir "%USERPROFILE%\lab78_^<прізвище^>.zip"
+ Volume in drive C is Windows
+ Volume Serial Number is 2C40-3FBA
+
+ Directory of C:\Users\runneradmin
+
+10/07/2026  06:12 PM            11,513 lab78_ivanenko.zip
+               1 File(s)         11,513 bytes
+               0 Dir(s)  31,337,418,752 bytes free
+[exit 0]
+CHECK end files: 
+40
