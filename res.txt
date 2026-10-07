@@ -1,0 +1,230 @@
+﻿
+===== T1 service/library/audit
+
+SERVICE_NAME: Schedule 
+        TYPE               : 30  WIN32  
+        STATE              : 4  RUNNING 
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+[SC] QueryServiceConfig SUCCESS
+
+SERVICE_NAME: Schedule
+        TYPE               : 20  WIN32_SHARE_PROCESS 
+        START_TYPE         : 2   AUTO_START
+        ERROR_CONTROL      : 1   NORMAL
+        BINARY_PATH_NAME   : C:\Windows\system32\svchost.exe -k netsvcs -p
+        LOAD_ORDER_GROUP   : SchedulerGroup
+        TAG                : 0
+        DISPLAY_NAME       : Task Scheduler
+        DEPENDENCIES       : RPCSS
+                           : SystemEventsBroker
+        SERVICE_START_NAME : LocalSystem
+291
+GoogleSystem
+Microsoft
+Mozilla
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Boot
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Logon
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Maintenance
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Plain
+
+TaskPath                     TaskName                                                                     State Author 
+--------                     --------                                                                     ----- ------ 
+\                            HostedComputeAgent                                                         Running        
+\                            MicrosoftEdgeUpdateTaskMachineCore{2DAC648F-6FF6-4857-97D8-9424877BBB61}  Disabled        
+\                            MicrosoftEdgeUpdateTaskMachineUA{942EB968-C11A-4BD4-9577-523150453F3C}    Disabled        
+\                            primer                                                                       Ready        
+\GoogleSystem\GoogleUpdater\ GoogleUpdaterTaskSystem152.0.7933.0{4AA34938-C82C-4D1A-B478-99BFF9494097}    Ready NT A...
+\Mozilla\                    Firefox Default Browser Agent 308046B0AF4A39CB                               Ready Mozilla
+
+
+hidden: 57
+
+===== T2 who_am_i direct
+Wed 10/07/2026 18:12:38.51 | MAN | runnervmfi6oq\runneradmin | High
+
+===== T3/T6 tasks: create T1_basic-like + SYSTEM + high via schtasks
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:19 char:1
++ schtasks /create /tn "$F\T1_basic" /tr "`"$D\who_am_i.bat`" $S T1" /s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T1_basic" has successfully been created.
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:20 char:1
++ schtasks /create /tn "$F\T8_system" /tr "`"C:\Users\Public\lab1314_$S ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T8_system" has successfully been created.
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:21 char:1
++ schtasks /create /tn "$F\T8_high" /tr "`"$D\who_am_i.bat`" $S T8H" /s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T8_high" has successfully been created.
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T1_basic".
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T8_system".
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T8_high".
+Wed 10/07/2026 18:12:38.51 | MAN | runnervmfi6oq\runneradmin | High
+Wed 10/07/2026 18:12:38.72 | T8S | nt authority\system | System
+Wed 10/07/2026 18:12:39.02 | T1 | runnervmfi6oq\runneradmin | High
+Wed 10/07/2026 18:12:39.07 | T8H | runnervmfi6oq\runneradmin | High
+
+===== T7 cli + powershell
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:26 char:1
++ schtasks /create /tn "$F\T9_cli" /tr "`"C:\Users\Public\lab1314_$S\wh ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T9_cli" has successfully been created.
+
+Folder: lab1314_ivanenko
+HostName:                             runnervmfi6oq
+TaskName:                             lab1314_ivanenko\T9_cli
+Next Run Time:                        N/A
+Status:                               Ready
+Logon Mode:                           Interactive only
+Last Run Time:                        11/30/1999 12:00:00 AM
+Last Result:                          267011
+Author:                               runnervmfi6oq\runneradmin
+Task To Run:                          C:\Users\Public\lab1314_ivanenko\who_am_i.bat ivanenko T9
+Start In:                             N/A
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T9_cli".
+0
+SUCCESS: The parameters of scheduled task "lab1314_ivanenko\T9_cli" have been changed.
+Disabled
+SUCCESS: The parameters of scheduled task "lab1314_ivanenko\T9_cli" have been changed.
+
+TaskName  LastRunTime          LastTaskResult NextRunTime         
+--------  -----------          -------------- -----------         
+T8_high   10/7/2026 6:12:38 PM              0                     
+T1_basic  10/7/2026 6:12:38 PM              0                     
+T8_system 10/7/2026 6:12:38 PM              0                     
+T9_cli    10/7/2026 6:12:46 PM              0                     
+T10_ps    10/7/2026 6:12:51 PM              0 10/7/2026 6:15:51 PM
+
+
+
+===== T8 export/import
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2026-10-07T18:12:46</Date>
+    <Author>runnervmfi6oq\runneradmin</Author>
+    <URI>\lab1314_ivanenko\T9_cli</URI>
+  </RegistrationInfo>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-21-1643835476-1616584234-1346609752-500</UserId>
+      <LogonType>InteractiveToken</LogonType>
+    </Principal>
+  </Principals>
+  <Settings>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <IdleSettings>
+      <Duration>PT10M</Duration>
+      <WaitTimeout>PT1H</WaitTimeout>
+C:\Users\Public\lab1314_ivanenko\who_am_i.bat
+SUCCESS: The scheduled task "lab1314_ivanenko\T11_imported" has successfully been created.
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T11_imported".
+Wed 10/07/2026 18:12:55.71 | T11 | runnervmfi6oq\runneradmin | High
+
+===== T9 diagnostics: exit code 7, missing file, event log
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:48 char:1
++ schtasks /create /tn "$F\T12_fail" /tr "`"$D\fail7.bat`"" /sc once /s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T12_fail" has successfully been created.
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:49 char:1
++ schtasks /create /tn "$F\T13_missing" /tr "`"$D\no_such_file.bat`"" / ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T13_missing" has successfully been created.
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T12_fail".
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T13_missing".
+T12 result: 7 (expect 7)
+T13 result: 1
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:53 char:1
++ schtasks /create /tn "$F\T13b_missing_exe" /tr "`"$D\nofile.exe`"" /s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T13b_missing_exe" has successfully been created.
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T13b_missing_exe".
+T13b missing exe: 0x80070002 (lab claims 0x80070002)
+T13 missing bat: 0x1
+
+TimeCreated           Id
+-----------           --
+10/7/2026 6:13:05 PM 110
+10/7/2026 6:13:00 PM 102
+10/7/2026 6:13:00 PM 201
+10/7/2026 6:13:00 PM 200
+10/7/2026 6:13:00 PM 100
+10/7/2026 6:12:59 PM 102
+10/7/2026 6:12:59 PM 201
+10/7/2026 6:12:59 PM 102
+10/7/2026 6:12:59 PM 201
+10/7/2026 6:12:59 PM 200
+10/7/2026 6:12:59 PM 100
+10/7/2026 6:12:59 PM 129
+
+
+
+===== T5 long_run via task (60 s)
+schtasks : WARNING: Task may not run because /ST is earlier than current time.
+At D:\a\os-labs-test\os-labs-test\tests\run1314.ps1:59 char:1
++ schtasks /create /tn "$F\T6_long" /tr "`"$D\long_run.bat`" $S" /sc on ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Task m...n current time.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+SUCCESS: The scheduled task "lab1314_ivanenko\T6_long" has successfully been created.
+SUCCESS: Attempted to run the scheduled task "lab1314_ivanenko\T6_long".
+
+---------- C:\USERS\PUBLIC\LAB1314_IVANENKO\LONG.LOG: 1
+
+---------- C:\USERS\PUBLIC\LAB1314_IVANENKO\LONG.LOG: 1
+
+===== T10 backup_job
+5
+rc1=0
+rc2=0
+Wed 10/07/2026 18:14:21.32 | rc=1 | OK
+Wed 10/07/2026 18:14:21.34 | rc=0 | OK
+
+===== cleanup
+10
+SUCCESS: The scheduled task "lab1314_ivanenko\T1_basic" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T6_long" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T8_high" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T8_system" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T9_cli" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T10_ps" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T11_imported" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T12_fail" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T13_missing" was successfully deleted.
+SUCCESS: The scheduled task "lab1314_ivanenko\T13b_missing_exe" was successfully deleted.
+0
