@@ -1,0 +1,192 @@
+===== T1 SET
+147
+USERDOMAIN=runnervmfi6oq
+USERDOMAIN_ROAMINGPROFILE=runnervmfi6oq
+USERNAME=runneradmin
+USERPROFILE=C:\Users\runneradmin
+[Kyiv ] [Kyiv]
+CDE
+FGH
+ABCDEF
+ABxyEFGH
+===== T2 SET /A
+7/2=3
+-7/2=-3
+010+1=9
+0x1F=31
+overflow=-2147483648
+5%3=2
+Divide by zero error.
+[exit 1073750993]
+Invalid number.  Numeric constants are either decimal (17),
+hexadecimal (0x11), or octal (021).
+[exit 1073750991]
+===== prep1112 bad/good
+[ПОМИЛКА] Вкажіть прізвище: prep1112.bat prizvyshche
+[exit 1]
+[ПОМИЛКА] Прізвище має містити лише латинські літери.
+[exit 3]
+Файлів у корені (очікується 9):
+9
+Файлів у всьому дереві (очікується 36):
+36
+[exit 0]
+===== T3 greet (Anna, 20 / empty name, 17 / 70 / abc)
+Як вас звати? (Enter - Student): Ваш вік (років): Вік не введено.
+Як вас звати? (Enter - Student): Ваш вік (років): Вік не введено.
+Як вас звати? (Enter - Student): Ваш вік (років): Вік не введено.
+===== T4 check_env
+[ПОМИЛКА] Не задано прізвище.
+[exit 1 expect 1]
+[OK] Середовище для ivanenko готове.
+[exit 0 expect 0]
+[ПОМИЛКА] Немає теки lab1112_nobody. Запустіть prep1112.bat nobody.
+[exit 2 expect 2]
+[ПОМИЛКА] Прізвище має містити лише латинські літери.
+[exit 4 expect 4]
+--- order_demo (expect 4 lines code 2)
+Код завершення check_env: 2
+Умова 1: код не менший за 1
+Умова 2: код не менший за 2
+Умова EQU: код дорівнює саме 2
+===== T5 isint
+isint 5 = YES 
+isint -5 = YES 
+isint 0 = YES 
+isint 08 = NO
+isint 123456789 = YES 
+isint 1234567890 = NO
+isint abc = NO
+isint 1.5 = NO
+isint  = NO
+isint 12a = NO
+--- loop 5 / 12 / 13 / 20 / 21 / abc
+Сума 1..5 = 15
+Факторіал 5! = 120
+Сума 1..12 = 78
+Факторіал 12! = 479001600
+Сума 1..13 = 91
+Факторіал 13! = 1932053504
+УВАГА: при N більше 12 факторіал не вміщується у 32 біти, результат хибний.
+Сума 1..20 = 210
+Факторіал 20! = -2102132736
+УВАГА: при N більше 12 факторіал не вміщується у 32 біти, результат хибний.
+N має бути в межах від 1 до 20.
+N має бути цілим числом без ведучих нулів.
+===== T6 rc
+[OK] Середовище для ivanenko готове.
+
+Код robocopy: 1
+Файли скопійовано.
+[exit 0]
+[OK] Середовище для ivanenko готове.
+
+Код robocopy: 0
+Нічого копіювати: копія актуальна.
+[exit 0]
+[OK] Середовище для ivanenko готове.
+
+Код robocopy: 2
+У копії є зайві файли, нових файлів немає.
+[exit 0]
+[OK] Середовище для ivanenko готове.
+
+Код robocopy: 3
+Файли скопійовано, у копії є зайві файли.
+[exit 0]
+[OK] Середовище для ivanenko готове.
+
+Код robocopy: 0
+Нічого копіювати: копія актуальна.
+[exit 0]
+===== T7 sum
+Result: 5
+happy end
+[exit 0]
+Result: -6
+happy end
+[exit 0]
+odin abo oba operandy ne ye cilymy chyslamy
+[exit 2]
+odin abo oba operandy ne ye cilymy chyslamy
+[exit 2]
+odin abo oba operandy ne ye cilymy chyslamy
+[exit 2]
+Enter value of variable 2: odna abo dekilka zminnykh vidsutni
+[exit 1]
+-6
+happy end
+Wed 10/07/2026 18:12:28.98 sum=5
+Wed 10/07/2026 18:12:29.00 sum=-6
+Wed 10/07/2026 18:12:29.02 not integer
+Wed 10/07/2026 18:12:29.04 not integer
+Wed 10/07/2026 18:12:29.05 not integer
+Wed 10/07/2026 18:12:29.07 input missing
+===== T8 menu via choice (best effort)
+==========================================
+  Меню лабораторної роботи 11-12 (ivanenko)
+==========================================
+  1 - Сума двох чисел (sum.bat)
+  2 - Сума та факторіал (loop.bat)
+  3 - Перевірка середовища (check_env.bat)
+  Q - Вихід
+
+Ваш вибір: 3
+[OK] Середовище для ivanenko готове.
+
+Press any key to continue . . . 
+==========================================
+  Меню лабораторної роботи 11-12 (ivanenko)
+==========================================
+  1 - Сума двох чисел (sum.bat)
+  2 - Сума та факторіал (loop.bat)
+  3 - Перевірка середовища (check_env.bat)
+  Q - Вихід
+
+Ваш вибір: 
+ERROR: The file is either empty or does not contain the valid choices.
+До побачення!
+[menu exit 0]
+===== T9 rotate_log
+Записів: 20, ротацій: 3
+Поточний журнал: 20 байт
+Попередній журнал: 60 байт
+===== T10 stats
+[OK] Середовище для ivanenko готове.
+Файлів у дереві        : 36
+Загальний розмір, байт : 273
+Середній розмір, байт  : 7
+Найбільший файл        : 13 байт, f1.txt
+Файлів у корені       : 9 (25% від усіх)
+[exit 0]
+===== T10 manager (best effort: stats then quit)
+[OK] Середовище для ivanenko готове.
+==========================================
+  Менеджер: ivanenko
+==========================================
+  1 - Статистика дерева
+  2 - Резервна копія та аналіз коду robocopy
+  3 - Журнал з ротацією (демонстрація)
+  4 - Видалити робоче дерево (з підтвердженням)
+  Q - Вихід
+
+Ваш вибір: 1
+[OK] Середовище для ivanenko готове.
+Файлів у дереві        : 36
+Загальний розмір, байт : 273
+Середній розмір, байт  : 7
+Найбільший файл        : 13 байт, f1.txt
+Файлів у корені       : 9 (25% від усіх)
+
+Press any key to continue . . . 
+==========================================
+  Менеджер: ivanenko
+==========================================
+  1 - Статистика дерева
+  2 - Резервна копія та аналіз коду robocopy
+  3 - Журнал з ротацією (демонстрація)
+  4 - Видалити робоче дерево (з підтвердженням)
+  Q - Вихід
+
+Ваш вибір: Q
+[manager exit 0]
