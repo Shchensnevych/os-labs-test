@@ -1,4 +1,4 @@
-$ErrorActionPreference='Continue'
+﻿$ErrorActionPreference='Continue'
 [Console]::OutputEncoding=[Text.Encoding]::UTF8
 $S='ivanenko'; $N=7; $H='example.com'
 function Hd($t){ Write-Host "`n===== $t" }
@@ -33,7 +33,7 @@ Hd 'T6 inbound rule with scope'
 netsh advfirewall firewall add rule name="FW_${S}_in" dir=in action=allow protocol=TCP localport=$(5000+$N) profile=private remoteip=10.20.$N.0/24
 netsh advfirewall firewall show rule name="FW_${S}_in" verbose
 netsh advfirewall firewall set rule name="FW_${S}_in" new enable=no
-netsh advfirewall firewall show rule name="FW_${S}_in" verbose | Select-String -Pattern 'Enabled|Включено'
+netsh advfirewall firewall show rule name="FW_${S}_in" verbose | Select-String -Pattern 'Enabled'
 Hd 'T7 logging'
 netsh advfirewall show currentprofile logging
 netsh advfirewall set currentprofile logging droppedconnections enable

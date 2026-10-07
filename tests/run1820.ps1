@@ -1,4 +1,4 @@
-$ErrorActionPreference='Continue'
+﻿$ErrorActionPreference='Continue'
 [Console]::OutputEncoding=[Text.Encoding]::UTF8
 function Hd($t){ Write-Host "`n===== $t" }
 $K=3

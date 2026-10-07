@@ -1,4 +1,4 @@
-$ErrorActionPreference='Continue'
+﻿$ErrorActionPreference='Continue'
 [Console]::OutputEncoding=[Text.Encoding]::UTF8
 $S='ivanenko'; $D="$env:PUBLIC\lab1314_$S"; $F="lab1314_$S"
 function Hd($t){ Write-Host "`n===== $t" }
